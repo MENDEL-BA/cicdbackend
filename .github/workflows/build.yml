@@ -38,5 +38,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=MENDEL-BA_cicdbackend  -Dsonar.projectName='cicdbackend' -Dsonar.organization=mendel-ba
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=MENDEL-BA_cicdbackend  -Dsonar.projectName='cicdbackend' -Dsonar.organization=mendel-ba -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
 
