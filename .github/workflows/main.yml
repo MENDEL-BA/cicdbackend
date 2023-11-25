@@ -1,0 +1,56 @@
+name: Main CI GitHub Actions
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  back-end-ci:
+    name: Build, test and analyze Back
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 'back'
+
+    
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: 11
+          distribution: 'temurin'
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Build app
+        run: mvn clean install
+      - name: Run tests
+        run: mvn clean test
+      - name: Build and analyze SonarSource
+        env:
+          GITHUB_TOKEN: ${{ secrets.HUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=asediab_Gerez-un-projet-collaboratif-back -Dsonar.projectName='Asediab_Gerez-un-projet-collaboratif' -Dsonar.organization=asediab
+      - name: SonarQuality Analise
+        uses: sonarsource/sonarqube-quality-gate-action@master
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST }}
+        with:
+          scanMetadataReportFile: back/target/sonar/report-task.txt
