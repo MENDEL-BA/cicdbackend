@@ -119,11 +119,11 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST }}
         with:
           projectBaseDir: front
-      - name: SonarQuality
+      - name: SonarCloud Scan
         uses: sonarsource/sonarqube-quality-gate-action@master
         timeout-minutes: 5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONT }}
         with:
           scanMetadataReportFile: front/.scannerwork/report-task.txt
