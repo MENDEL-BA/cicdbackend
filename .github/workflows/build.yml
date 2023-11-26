@@ -37,15 +37,10 @@ jobs:
           path: front/coverage/bobapp/lcov.info
           key: ${{ runner.os }}-front-lcov-${{ hashFiles('front/coverage/bobapp/lcov.info') }}
           restore-keys: ${{ runner.os }}-front-lcov
-      - name: SonarSource Scan
-        uses: sonarsource/sonarqube-scan-action@master
-        with:
-          fetch-depth: 0
       - name: SonarCloud Scan
-        uses: sonarsource/sonarqube-quality-gate-action@master
-        timeout-minutes: 5
+        uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONT }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: front
