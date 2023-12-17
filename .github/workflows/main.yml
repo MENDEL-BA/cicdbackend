@@ -39,6 +39,12 @@ jobs:
         run: mvn clean install
       - name: Run tests
         run: mvn clean test
+      - name: Test Reporting
+        uses: github/test-reporting@v0.7.0
+        with:
+          name: 'Test Report'
+          format: 'JUnit'
+          path: 'reports'
       - name: Cache SonarCloud packages
         uses: actions/cache@v3
         with:
