@@ -98,9 +98,6 @@ jobs:
 
       - name: Download Coverage Report
         uses: actions/download-artifact@v3
-        with:
-          name: coverage-report
-
       - name: Set up Git
         run: |
           git config --global user.email "actions@github.com"
