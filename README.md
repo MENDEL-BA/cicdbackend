@@ -1,5 +1,11 @@
-# BobApp
+Back  
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=MENDEL-BA_cicdbackend&metric=coverage)](https://sonarcloud.io/summary/new_code?id=MENDEL-BA_cicdbackend)  
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=MENDEL-BA_cicdbackend)](https://sonarcloud.io/summary/new_code?id=MENDEL-BA_cicdbackend)
 
+Front   
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=cicdgithub_cicd-front&branch=main&coderage)](https://sonarcloud.io/summary/new_code?id=cicdgithub_cicd-front&branch=main&coderage)
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=cicdgithub_cicd-front)](https://sonarcloud.io/summary/new_code?id=cicdgithub_cicd-front)
+# BobApp
 Clone project:
 
 > git clone XXXXX
