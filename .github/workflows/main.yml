@@ -129,9 +129,6 @@ jobs:
       - name: SonarQuality
         uses: sonarsource/sonarqube-quality-gate-action@master
         timeout-minutes: 5
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST }}
         with:
           scanMetadataReportFile: front/.scannerwork/report-task.txt
 
