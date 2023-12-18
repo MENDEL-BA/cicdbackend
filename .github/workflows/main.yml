@@ -203,8 +203,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3    # checkout the repo
       - run: npm ci                   # install packages
-      - run: npm test                 # run tests (configured to use jest-junit reporter)
-
+      - run: npm test -- --watch=false --browsers=ChromeHeadless --code-coverage                 # run tests (configured to use jest-junit reporter)
       - name: Test Report
         uses: phoenix-actions/test-reporting@v8
         id: test-report               # Set ID reference for step
