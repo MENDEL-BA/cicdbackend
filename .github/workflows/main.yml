@@ -85,7 +85,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: coverage-report
-          path: target/site/jacoco
+          path: ./reports
 
   publish-coverage:
     runs-on: ubuntu-latest
@@ -160,8 +160,8 @@ jobs:
       - name: Cache coverage report
         uses: actions/cache@v3
         with:
-          path: front/coverage/bobapp/lcov.info
-          key: ${{ runner.os }}-front-lcov-${{ hashFiles('front/coverage/bobapp/lcov.info') }}
+          path: front/reports/lcov.info
+          key: ${{ runner.os }}-front-lcov-${{ hashFiles('front/reports/lcov.info') }}
           restore-keys: ${{ runner.os }}-front-lcov
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
@@ -209,8 +209,8 @@ jobs:
         id: test-report               # Set ID reference for step
         if: success() || failure()    # run this step even if previous step failed
         with:
-          name: JEST Tests            # Name of the check run which will be created
-          path: reports/*.xml    # Path to test results
+          name: coverage-report            # Name of the check run which will be created
+          path: ./reports    # Path to test results
           reporter: jest-junit        # Format of test results
       - name: Read output variables
         run: |
