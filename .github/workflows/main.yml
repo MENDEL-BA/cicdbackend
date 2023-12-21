@@ -116,7 +116,7 @@ jobs:
       - name: Cache coverage report
         uses: actions/cache@v3
         with:
-          path: front/reports/lcov.info
+          path: front/coverage/bobapp/lcov.info
           key: ${{ runner.os }}-front-lcov-${{ hashFiles('front/reports/lcov.info') }}
           restore-keys: ${{ runner.os }}-front-lcov
       - name: SonarCloud Scan
