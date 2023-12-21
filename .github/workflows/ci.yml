@@ -10,6 +10,9 @@ jobs:
   build-test:
     name: Build & Test
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 'front'
     steps:
       - uses: actions/checkout@v3
       - run: npm test -- --watch=false --browsers=ChromeHeadless --code-coverage  
