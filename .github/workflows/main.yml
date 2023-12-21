@@ -113,7 +113,6 @@ jobs:
         run: npm run build
       - name: Run Tests
         run: npm test -- --watch=false --browsers=ChromeHeadless --code-coverage
-      - name: Cache coverage report
       - uses: actions/cache@v3
         id: playwright-cache
         with:
