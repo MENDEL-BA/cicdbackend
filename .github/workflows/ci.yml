@@ -8,16 +8,27 @@ on:
       - main
 jobs:
   build-test:
+    name: Build & Test
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: 'front'
     steps:
-      - uses: actions/checkout@v2         # checkout the repo
-      - run: npm ci                       # install packages
-      - run: npm test -- --watch=false --browsers=ChromeHeadless --code-coverage                    # run tests (configured to use jest-junit reporter)
-      - uses: actions/upload-artifact@v2  # upload test results
-        if: success() || failure()        # run this step even if previous step failed
+      - uses: actions/checkout@v2
+      - run: npm ci
+      - run: npm run build
+      - run: npm run format-check
+      - run: npm run lint
+      - run: npm test -- --watch=false --browsers=ChromeHeadless --code-coverage  
+
+      - name: Upload test results
+        if: success() || failure()
+        uses: actions/upload-artifact@v2
         with:
           name: test-results
-          path: '*.xml'
+          path: tests/*.xml
+
+      - name: Create test report
+        uses: ./
+        if: success() || failure()
+        with:
+          name: JEST Tests
+          path: tests/*.xml
+          reporter: jest-junit

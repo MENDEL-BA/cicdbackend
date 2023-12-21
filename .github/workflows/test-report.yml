@@ -12,7 +12,7 @@ jobs:
         working-directory: 'front'
     steps:
       - uses: phoenix-actions/test-reporting@v8
-        id: test-report                     # Set ID reference for step
+      - uses: ./
         with:
           artifact: test-results            # artifact name
           name: JEST Tests                  # Name of the check run which will be created
