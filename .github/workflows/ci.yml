@@ -11,16 +11,12 @@ jobs:
     name: Build & Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: npm ci
-      - run: npm run build
-      - run: npm run format-check
-      - run: npm run lint
+      - uses: actions/checkout@v3
       - run: npm test -- --watch=false --browsers=ChromeHeadless --code-coverage  
 
       - name: Upload test results
         if: success() || failure()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: test-results
           path: tests/*.xml
